@@ -9,6 +9,20 @@ angular.module('nodeBounceApp')
     });
 
 
+    $scope.restartMongo = function() {
+	    //alert('DETATCH!');
+
+			$http.post('/api/admin/restartMongo', {action:'restart'}).
+			  success(function(data, status, headers, config) {
+				  console.log('status: ' + status);
+				  console.log('headers: ' + headers);
+				  console.log('data: ' + data);
+			  }).
+			  error(function(data, status, headers, config) {
+				  console.log('problem with request: ' + e.message);
+			  });
+  	};
+
     $scope.restart = function() {
 	    //alert('DETATCH!');
 
