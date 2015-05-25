@@ -8,4 +8,10 @@ angular.module('nodeBounceApp')
       $scope.awesomeThings = awesomeThings;
     });
 
+
+    $scope.restart = function() {
+    alert('DETATCH!');
+  };
+
+
   });
