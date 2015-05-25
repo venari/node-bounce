@@ -21,22 +21,23 @@ exports.restartMongo = function(req, res) {
 	var child = sudo([ 'service', 'mongod', 'stop' ], options);
 	child.stdout.on('data', function (data) {
 	    console.log(data.toString());
+
+			console.log("Removing Mongo DB lock if present...");
+
+			child = sudo([ 'rm', '/var/lib/mongod/mongod.lock' ], options);
+			child.stdout.on('data', function (data) {
+			    console.log(data.toString());
+
+					console.log("Starting Mongo Service...");
+
+					child = sudo([ 'service', 'mongod', 'start' ], options);
+					child.stdout.on('data', function (data) {
+					    console.log(data.toString());
+					});
+			});
+
 	});
 
-	console.log("Removing Mongo DB lock if present...");
-
-	child = sudo([ 'rm', '/var/lib/mongod/mongod.lock' ], options);
-	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
-	});
-
-
-	console.log("Starting Mongo Service...");
-
-	child = sudo([ 'service', 'mongod', 'start' ], options);
-	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
-	});
 
   res.json({restartedMongo:"OK"});
 };
