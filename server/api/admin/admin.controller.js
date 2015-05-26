@@ -22,7 +22,7 @@ exports.mongoStatus = function(req, res) {
   res.json([]);
 };
 
-exports.restartMongo = function(req, res) {
+exports.mongoStop = function(req, res) {
 
   console.log("Stopping Mongo Service...");
 
