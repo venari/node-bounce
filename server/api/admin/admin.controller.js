@@ -14,6 +14,14 @@ exports.index = function(req, res) {
   res.json([]);
 };
 
+exports.uptime = function(req, res) {
+  res.json([]);
+};
+
+exports.mongoStatus = function(req, res) {
+  res.json([]);
+};
+
 exports.restartMongo = function(req, res) {
 
   console.log("Stopping Mongo Service...");
