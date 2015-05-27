@@ -13,5 +13,6 @@ router.get('/energyManagementDashboardStatus', controller.energyManagementDashbo
 //router.post('/mongoUnlock', controller.mongoUnlock);
 //router.post('/mongoStart', controller.mongoStart);
 router.post('/restart', controller.restart);
+router.post('/shutdown', controller.restart);
 
 module.exports = router;

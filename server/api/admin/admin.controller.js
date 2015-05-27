@@ -121,3 +121,14 @@ exports.restart = function(req, res) {
 	});
   res.json({restarting:"OK"});
 };
+
+exports.shutdown = function(req, res) {
+  console.log("SHUTDOWN!!!");
+  console.log(req.body.action);
+
+	var child = sudo([ 'shutdown', '-h', 'now' ], options);
+	child.stdout.on('data', function (data) {
+	    console.log(data.toString());
+	});
+  res.json({restarting:"OK"});
+};
