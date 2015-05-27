@@ -4,6 +4,8 @@ angular.module('nodeBounceApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
     $scope.mongoStatus = "";
+    $scope.energyManagementDashboardStatus = "";
+    $scope.uptime = "";
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
@@ -21,7 +23,27 @@ angular.module('nodeBounceApp')
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
 			  });
-  	}, 10000);
+			$http.get('/api/admin/energyManagementDashboardStatus').
+			  success(function(data, status, headers, config) {
+				  console.log('status: ' + status);
+				  console.log('headers: ' + headers);
+				  console.log('data: ' + data);
+				  $scope.energyManagementDashboardStatus = data;
+			  }).
+			  error(function(data, status, headers, config) {
+				  console.log('problem with request: ' + e.message);
+			  });
+			$http.get('/api/admin/uptime').
+			  success(function(data, status, headers, config) {
+				  console.log('status: ' + status);
+				  console.log('headers: ' + headers);
+				  console.log('data: ' + data);
+				  $scope.uptime = data;
+			  }).
+			  error(function(data, status, headers, config) {
+				  console.log('problem with request: ' + e.message);
+			  });
+  	}, 1000);
 
     $scope.restartMongo = function() {
 	    //alert('DETATCH!');

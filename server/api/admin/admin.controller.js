@@ -42,6 +42,47 @@ exports.mongoStatus = function(req, res) {
 	});
 };
 
+exports.energyManagementDashboardStatus = function(req, res) {
+
+	var response = "";
+  console.log("Checking Energy Managemnt Dashboard Status...");
+
+	var child = sudo([ 'service', 'energyManagementDashboard', 'status' ], options);
+	child.stdout.on('data', function (data) {
+	    console.log(data.toString());
+	    response += data.toString();
+	    console.log(response);
+	});
+	child.stdout.on('end', function () {
+	    console.log("end");
+		  res.json(response);
+	});
+	child.stdout.on('close', function (code) {
+	    console.log("close - code:"  + code);
+	});
+};
+
+exports.uptime = function(req, res) {
+
+	var response = "";
+  console.log("Checking uptime...");
+
+	var child = sudo([ 'uptime' ], options);
+	child.stdout.on('data', function (data) {
+	    console.log(data.toString());
+	    response += data.toString();
+	    console.log(response);
+	});
+	child.stdout.on('end', function () {
+	    console.log("end");
+		  res.json(response);
+	});
+	child.stdout.on('close', function (code) {
+	    console.log("close - code:"  + code);
+	});
+};
+
+
 exports.mongoStop = function(req, res) {
 
   console.log("Stopping Mongo Service...");
