@@ -1,19 +1,16 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
 <div class="container">
 
-  <div class="row">
-    <button type="button" class="btn btn-lg btn-danger" confirmed-click="restartMongo()" ng-confirm-click="Would you like to restart MongoDB?">Restart Mongo</button>
+  <div class="col-lg-12">
+    <div class="row">
+      <button type="button" class="btn btn-lg btn-danger" confirmed-click="stopMongo()" 
+              ng-confirm-click="Would you like to stop MongoDB?">Stop Mongo</button>
+      <button type="button" class="btn btn-lg btn-primary" ng-click="startMongo()">Start Mongo</button>
+      <button type="button" class="btn btn-lg btn-danger" confirmed-click="stopEnergyManagementDashboard()" 
+              ng-confirm-click="Would you like to stop the Energy Management Dashboard?">Stop Energy Management Dashboard</button>
+      <button type="button" class="btn btn-lg btn-primary" ng-click="startEnergyManagementDashboard()">Start Energy Management Dashboard</button>
+    </div>
   </div>
-
   <div class="row">
     <p>Mongo Status: {{mongoStatus}}</p>
     <p>EnergyManagementDashboard Status: {{energyManagementDashboardStatus}}</p>

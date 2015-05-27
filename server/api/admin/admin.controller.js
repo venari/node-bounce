@@ -14,14 +14,6 @@ exports.index = function(req, res) {
   res.json([]);
 };
 
-exports.uptime = function(req, res) {
-  res.json([]);
-};
-
-exports.mongoStatus = function(req, res) {
-  res.json([]);
-};
-
 function sudoCall(args, callback) {
 
 	console.log(args);
@@ -66,34 +58,27 @@ exports.uptime = function(req, res) {
 	});
 };
 
+exports.removeMongoLockFile = function(req, res) {
 
-exports.mongoStop = function(req, res) {
+  console.log("Removing Mongo Lockfile...");
 
-  console.log("Stopping Mongo Service...");
-
-	var child = sudo([ 'service', 'mongod', 'stop' ], options);
-	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
-
-			console.log("Removing Mongo DB lock if present...");
-
-			child = sudo([ 'rm', '/var/lib/mongod/mongod.lock' ], options);
-			child.stdout.on('data', function (data) {
-			    console.log(data.toString());
-
-					console.log("Starting Mongo Service...");
-
-					child = sudo([ 'service', 'mongod', 'start' ], options);
-					child.stdout.on('data', function (data) {
-					    console.log(data.toString());
-					});
-			});
-
+	sudoCall([ 'rm', '/var/lib/mongod/mongod.lock' ], function(response){
+		res.json(response);
 	});
-
-
-  res.json({restartedMongo:"OK"});
 };
+
+exports.updateService = function(req, res) {
+
+  console.log("updateService...");
+	console.log(req.body.action);
+	console.log(req.body.service);
+
+
+	sudoCall([ 'service', req.body.service, req.body.action ], function(response){
+		res.json(response);
+	});
+};
+
 
 exports.restart = function(req, res) {
   console.log("RESTART!!!");

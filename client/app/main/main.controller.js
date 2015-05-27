@@ -18,11 +18,19 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
-				  $scope.mongoStatus = data;
+				  if(data.contains("EnergyManagementDashboard /usr/local/bin/node /home/pi/EnergyMonitoringDashboard/server/app.js"))
+				  {
+				  	$scope.mongoStatus = "OK";
+				  } else
+				  {
+				  	$scope.mongoStatus = data;
+					}
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
+				  $scope.mongoStatus = "UNKNOWN";
 			  });
+
 			$http.get('/api/admin/uptime').
 			  success(function(data, status, headers, config) {
 				  console.log('status: ' + status);
@@ -32,6 +40,7 @@ angular.module('nodeBounceApp')
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
+				  $scope.uptime = "UNKNOWN";
 			  });
   	}, 1000);
 
@@ -42,17 +51,42 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
-				  $scope.energyManagementDashboardStatus = data;
+				  if(data.contains("mongodb running"))
+				  {
+					  $scope.energyManagementDashboardStatus = "OK";
+				  } else
+				  {
+				  	$scope.energyManagementDashboardStatus = data;
+				  }
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
 			  });
   	}, 10000);
 
-    $scope.restartMongo = function() {
-	    //alert('DETATCH!');
+		function updateService(action, service, callback){
+			$http.post('/api/admin/updateService', {action:action, service:service}).
+			  success(function(data, status, headers, config) {
+				  console.log('status: ' + status);
+				  console.log('headers: ' + headers);
+				  console.log('data: ' + data);
+				  callback(data);
+			  }).
+			  error(function(data, status, headers, config) {
+				  console.log('problem with request: ' + e.message);
+			  });
+		}
 
-			$http.post('/api/admin/restartMongo', {action:'restart'}).
+    $scope.startMongo = function() {
+    	updateService('start', 'mongod', function(data){
+    	});
+		};
+    $scope.stopMongo = function() {
+    	updateService('stop', 'mongod', function(data){
+    	});
+		};
+    $scope.removeMongoLockFile = function() {
+			$http.post('/api/admin/removeMongoLockFile').
 			  success(function(data, status, headers, config) {
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
@@ -61,7 +95,16 @@ angular.module('nodeBounceApp')
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
 			  });
-  	};
+
+		};
+    $scope.startEnergyManagementDashboard = function() {
+    	updateService('start', 'EnergyManagementDashboard', function(data){
+    	});
+		};
+    $scope.stopEnergyManagementDashboard = function() {
+    	updateService('stop', 'EnergyManagementDashboard', function(data){
+    	});
+		};
 
     $scope.restart = function() {
 	    //alert('DETATCH!');
