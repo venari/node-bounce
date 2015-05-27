@@ -82,10 +82,12 @@ angular.module('nodeBounceApp')
 
     $scope.startMongo = function() {
     	updateService('start', 'mongod', function(data){
+		  	$scope.mongoStatus = data;
     	});
 		};
     $scope.stopMongo = function() {
     	updateService('stop', 'mongod', function(data){
+		  	$scope.mongoStatus = data;
     	});
 		};
     $scope.removeMongoLockFile = function() {
@@ -102,10 +104,12 @@ angular.module('nodeBounceApp')
 		};
     $scope.startEnergyManagementDashboard = function() {
     	updateService('start', 'EnergyManagementDashboard', function(data){
+		  	$scope.energyManagementDashboardStatus = data;
     	});
 		};
     $scope.stopEnergyManagementDashboard = function() {
     	updateService('stop', 'EnergyManagementDashboard', function(data){
+		  	$scope.energyManagementDashboardStatus = data;
     	});
 		};
 
