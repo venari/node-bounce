@@ -28,8 +28,8 @@ angular.module('nodeBounceApp')
 					}
 			  }).
 			  error(function(data, status, headers, config) {
-				  console.log('problem with request: ' + e.message);
 				  $scope.mongoStatus = "UNKNOWN";
+				  console.log('problem with request: ' + e.message);
 			  });
 
 			$http.get('/api/admin/uptime').
@@ -40,8 +40,8 @@ angular.module('nodeBounceApp')
 				  $scope.uptime = data;
 			  }).
 			  error(function(data, status, headers, config) {
-				  console.log('problem with request: ' + e.message);
 				  $scope.uptime = "UNKNOWN";
+				  console.log('problem with request: ' + e.message);
 			  });
 
 			console.log("About to check Dashboard Status")
@@ -59,6 +59,7 @@ angular.module('nodeBounceApp')
 				  }
 			  }).
 			  error(function(data, status, headers, config) {
+					  $scope.energyManagementDashboardStatus = "UNKNOWN";
 				  console.log('problem with request: ' + e.message);
 			  });
 
