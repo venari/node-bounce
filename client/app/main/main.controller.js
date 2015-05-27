@@ -12,7 +12,7 @@ angular.module('nodeBounceApp')
     });
 
 		setInterval(function () {
-			console.log("About to check Mongo Status")
+			console.log("About to check Mongo Status and uptime")
 			$http.get('/api/admin/mongoStatus').
 			  success(function(data, status, headers, config) {
 				  console.log('status: ' + status);
@@ -23,22 +23,26 @@ angular.module('nodeBounceApp')
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
 			  });
-			$http.get('/api/admin/energyManagementDashboardStatus').
-			  success(function(data, status, headers, config) {
-				  console.log('status: ' + status);
-				  console.log('headers: ' + headers);
-				  console.log('data: ' + data);
-				  $scope.energyManagementDashboardStatus = data;
-			  }).
-			  error(function(data, status, headers, config) {
-				  console.log('problem with request: ' + e.message);
-			  });
 			$http.get('/api/admin/uptime').
 			  success(function(data, status, headers, config) {
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
 				  $scope.uptime = data;
+			  }).
+			  error(function(data, status, headers, config) {
+				  console.log('problem with request: ' + e.message);
+			  });
+  	}, 1000);
+
+		setInterval(function () {
+			console.log("About to check Dashboard Status")
+			$http.get('/api/admin/energyManagementDashboardStatus').
+			  success(function(data, status, headers, config) {
+				  console.log('status: ' + status);
+				  console.log('headers: ' + headers);
+				  console.log('data: ' + data);
+				  $scope.energyManagementDashboardStatus = data;
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
