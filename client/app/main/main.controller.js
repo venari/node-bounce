@@ -18,7 +18,7 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
-				  if(data.contains("EnergyManagementDashboard /usr/local/bin/node /home/pi/EnergyMonitoringDashboard/server/app.js"))
+				  if(data.indexOf("mongodb running")>-1)
 				  {
 				  	$scope.mongoStatus = "OK";
 				  } else
@@ -51,7 +51,7 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
-				  if(data.contains("mongodb running"))
+				  if(data.indexOf("EnergyManagementDashboard /usr/local/bin/node /home/pi/EnergyMonitoringDashboard/server/app.js")>-1)
 				  {
 					  $scope.energyManagementDashboardStatus = "OK";
 				  } else

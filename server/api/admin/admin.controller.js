@@ -21,17 +21,19 @@ function sudoCall(args, callback) {
 
 	var child = sudo(args, options);
 	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
+	    //console.log(data.toString());
 	    response += data.toString();
-	    console.log(response);
+	    //console.log(response);
 	});
 	child.stdout.on('end', function () {
-	    console.log("end");
+	    //console.log("end");
 	    callback(response);
 	});
+/*
 	child.stdout.on('close', function (code) {
 	    console.log("close - code:"  + code);
 	});
+*/
 };
 
 exports.mongoStatus = function(req, res) {
