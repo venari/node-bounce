@@ -47,7 +47,7 @@ exports.energyManagementDashboardStatus = function(req, res) {
 	var response = "";
   console.log("Checking Energy Managemnt Dashboard Status...");
 
-	var child = sudo([ 'service', 'energyManagementDashboard', 'status' ], options);
+	var child = sudo([ 'service', 'EnergyManagementDashboard', 'status' ], options);
 	child.stdout.on('data', function (data) {
 	    console.log(data.toString());
 	    response += data.toString();
