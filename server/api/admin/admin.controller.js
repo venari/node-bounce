@@ -24,16 +24,18 @@ exports.mongoStatus = function(req, res) {
 
 exports.mongoStatus = function(req, res) {
 
+	var response = "";
   console.log("Checking Mongo Status...");
 
 	var child = sudo([ 'service', 'mongod', 'status' ], options);
 	child.stdout.on('data', function (data) {
 	    console.log(data.toString());
-
-		  res.json(data);
+	    response += data.toString();
+	    console.log(response);
 	});
 	child.stdout.on('end', function () {
 	    console.log("end");
+		  res.json(response);
 	});
 	child.stdout.on('close', function (code) {
 	    console.log("close - code:"  + code);
