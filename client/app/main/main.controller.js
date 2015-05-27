@@ -123,6 +123,7 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
+				  setTimeout(function(){checkStatuses();}, 5000);
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
@@ -137,6 +138,7 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
+				  setTimeout(function(){checkStatuses();}, 5000);
 			  }).
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
