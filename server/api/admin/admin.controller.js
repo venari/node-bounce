@@ -22,12 +22,12 @@ exports.mongoStatus = function(req, res) {
   res.json([]);
 };
 
-exports.mongoStatus = function(req, res) {
+function sudoCall(args, callback) {
 
+	console.log(args);
 	var response = "";
-  console.log("Checking Mongo Status...");
 
-	var child = sudo([ 'service', 'mongod', 'status' ], options);
+	var child = sudo(args, options);
 	child.stdout.on('data', function (data) {
 	    console.log(data.toString());
 	    response += data.toString();
@@ -35,50 +35,34 @@ exports.mongoStatus = function(req, res) {
 	});
 	child.stdout.on('end', function () {
 	    console.log("end");
-		  res.json(response);
+	    callback(response);
 	});
 	child.stdout.on('close', function (code) {
 	    console.log("close - code:"  + code);
+	});
+};
+
+exports.mongoStatus = function(req, res) {
+  console.log("Checking Mongo Status...");
+
+	sudoCall([ 'service', 'mongod', 'status' ], function(response){
+		res.json(response);
 	});
 };
 
 exports.energyManagementDashboardStatus = function(req, res) {
+  console.log("Checking EnergyManagementDashboard Status...");
 
-	var response = "";
-  console.log("Checking Energy Managemnt Dashboard Status...");
-
-	var child = sudo([ 'service', 'EnergyManagementDashboard', 'status' ], options);
-	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
-	    response += data.toString();
-	    console.log(response);
-	});
-	child.stdout.on('end', function () {
-	    console.log("end");
-		  res.json(response);
-	});
-	child.stdout.on('close', function (code) {
-	    console.log("close - code:"  + code);
+	sudoCall([ 'service', 'EnergyManagementDashboard', 'status' ], function(response){
+		res.json(response);
 	});
 };
 
 exports.uptime = function(req, res) {
-
-	var response = "";
   console.log("Checking uptime...");
 
-	var child = sudo([ 'uptime' ], options);
-	child.stdout.on('data', function (data) {
-	    console.log(data.toString());
-	    response += data.toString();
-	    console.log(response);
-	});
-	child.stdout.on('end', function () {
-	    console.log("end");
-		  res.json(response);
-	});
-	child.stdout.on('close', function (code) {
-	    console.log("close - code:"  + code);
+	sudoCall([ 'uptime' ], function(response){
+		res.json(response);
 	});
 };
 
