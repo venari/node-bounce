@@ -130,5 +130,5 @@ exports.shutdown = function(req, res) {
 	child.stdout.on('data', function (data) {
 	    console.log(data.toString());
 	});
-  res.json({restarting:"OK"});
+  res.json({"Shutting Down":"OK"});
 };
