@@ -73,7 +73,7 @@ angular.module('nodeBounceApp')
 			  });
   	};
 
-    $scope.restart = function() {
+    $scope.shutdown = function() {
 	    //alert('DETATCH!');
 
 			$http.post('/api/admin/shutdown', {action:'shutdown'}).
