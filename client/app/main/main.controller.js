@@ -11,7 +11,8 @@ angular.module('nodeBounceApp')
       $scope.awesomeThings = awesomeThings;
     });
 
-		setInterval(function () {
+    function checkStatuses()
+    {
 			console.log("About to check Mongo Status and uptime")
 			$http.get('/api/admin/mongoStatus').
 			  success(function(data, status, headers, config) {
@@ -42,9 +43,7 @@ angular.module('nodeBounceApp')
 				  console.log('problem with request: ' + e.message);
 				  $scope.uptime = "UNKNOWN";
 			  });
-  	}, 1000);
 
-		setInterval(function () {
 			console.log("About to check Dashboard Status")
 			$http.get('/api/admin/energyManagementDashboardStatus').
 			  success(function(data, status, headers, config) {
@@ -62,7 +61,11 @@ angular.module('nodeBounceApp')
 			  error(function(data, status, headers, config) {
 				  console.log('problem with request: ' + e.message);
 			  });
-  	}, 10000);
+
+    }
+
+    checkStatuses();
+		setInterval(checkStatuses, 30000);
 
 		function updateService(action, service, callback){
 			$http.post('/api/admin/updateService', {action:action, service:service}).
