@@ -22,6 +22,18 @@ exports.mongoStatus = function(req, res) {
   res.json([]);
 };
 
+exports.mongoStatus = function(req, res) {
+
+  console.log("Checking Mongo Status...");
+
+	var child = sudo([ 'service', 'mongod', 'status' ], options);
+	child.stdout.on('data', function (data) {
+	    console.log(data.toString());
+
+		  res.json(data);
+	});
+};
+
 exports.mongoStop = function(req, res) {
 
   console.log("Stopping Mongo Service...");
