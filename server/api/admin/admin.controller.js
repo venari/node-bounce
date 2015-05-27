@@ -32,6 +32,12 @@ exports.mongoStatus = function(req, res) {
 
 		  res.json(data);
 	});
+	child.stdout.on('end', function () {
+	    console.log("end");
+	});
+	child.stdout.on('close', function (code) {
+	    console.log("close - code:"  + code);
+	});
 };
 
 exports.mongoStop = function(req, res) {
