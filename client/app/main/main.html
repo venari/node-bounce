@@ -4,11 +4,14 @@
   <div class="col-lg-12">
     <div class="row">
       <button type="button" class="btn btn-lg btn-danger" confirmed-click="stopMongo()" 
-              ng-confirm-click="Would you like to stop MongoDB?">Stop Mongo</button>
-      <button type="button" class="btn btn-lg btn-primary" ng-click="startMongo()">Start Mongo</button>
+              ng-confirm-click="Would you like to stop MongoDB?">Stop DB</button>
+      <button type="button" class="btn btn-lg btn-danger" confirmed-click="removeMongoLockFile()" 
+              ng-confirm-click="Would you like to stop MongoDB?">Cleanup DB</button>
+
+      <button type="button" class="btn btn-lg btn-primary" ng-click="startMongo()">Start DB</button>
       <button type="button" class="btn btn-lg btn-danger" confirmed-click="stopEnergyManagementDashboard()" 
-              ng-confirm-click="Would you like to stop the Energy Management Dashboard?">Stop Energy Management Dashboard</button>
-      <button type="button" class="btn btn-lg btn-primary" ng-click="startEnergyManagementDashboard()">Start Energy Management Dashboard</button>
+              ng-confirm-click="Would you like to stop the Energy Management Dashboard?">Stop Dashboard</button>
+      <button type="button" class="btn btn-lg btn-primary" ng-click="startEnergyManagementDashboard()">Start Dashboard</button>
     </div>
     <div class="row">
       <p>Mongo Status: <span class="label {{mongoStatusLabel}}">{{mongoStatus}}</span></p>
