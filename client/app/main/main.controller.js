@@ -4,7 +4,9 @@ angular.module('nodeBounceApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
     $scope.mongoStatus = "";
+    $scope.mongoStatusLabel = "";
     $scope.energyManagementDashboardStatus = "";
+    $scope.energyManagementDashboardStatusLabel = "";
     $scope.uptime = "";
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -22,13 +24,16 @@ angular.module('nodeBounceApp')
 				  if(data.indexOf("mongodb running")>-1)
 				  {
 				  	$scope.mongoStatus = "OK";
+				  $scope.mongoStatusLabel = "label-success";
 				  } else
 				  {
 				  	$scope.mongoStatus = data;
+				  $scope.mongoStatusLabel = "label-danger";
 					}
 			  }).
 			  error(function(data, status, headers, config) {
 				  $scope.mongoStatus = "UNKNOWN";
+				  $scope.mongoStatusLabel = "label-warning";
 				  console.log('problem with request: ' + e.message);
 			  });
 
@@ -53,13 +58,16 @@ angular.module('nodeBounceApp')
 				  if(data.indexOf("EnergyManagementDashboard /usr/local/bin/node /home/pi/EnergyMonitoringDashboard/server/app.js")>-1)
 				  {
 					  $scope.energyManagementDashboardStatus = "OK";
+				  $scope.energyManagementDashboardStatusLabel = "label-success";
 				  } else
 				  {
 				  	$scope.energyManagementDashboardStatus = data;
+				  $scope.energyManagementDashboardStatusLabel = "label-danger";
 				  }
 			  }).
 			  error(function(data, status, headers, config) {
 					  $scope.energyManagementDashboardStatus = "UNKNOWN";
+				  $scope.energyManagementDashboardStatusLabel = "label-warning";
 				  console.log('problem with request: ' + e.message);
 			  });
 
@@ -85,11 +93,13 @@ angular.module('nodeBounceApp')
     $scope.startMongo = function() {
     	updateService('start', 'mongod', function(data){
 		  	$scope.mongoStatus = data;
+				  $scope.mongoStatusLabel = "label-warning";
     	});
 		};
     $scope.stopMongo = function() {
     	updateService('stop', 'mongod', function(data){
 		  	$scope.mongoStatus = data;
+				  $scope.mongoStatusLabel = "label-warning";
     	});
 		};
     $scope.removeMongoLockFile = function() {
@@ -107,11 +117,13 @@ angular.module('nodeBounceApp')
     $scope.startEnergyManagementDashboard = function() {
     	updateService('start', 'EnergyManagementDashboard', function(data){
 		  	$scope.energyManagementDashboardStatus = data;
+				  $scope.energyManagementDashboardStatusLabel = "label-warning";
     	});
 		};
     $scope.stopEnergyManagementDashboard = function() {
     	updateService('stop', 'EnergyManagementDashboard', function(data){
 		  	$scope.energyManagementDashboardStatus = data;
+				  $scope.energyManagementDashboardStatusLabel = "label-warning";
     	});
 		};
 

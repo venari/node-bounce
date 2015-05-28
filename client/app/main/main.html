@@ -11,8 +11,8 @@
       <button type="button" class="btn btn-lg btn-primary" ng-click="startEnergyManagementDashboard()">Start Energy Management Dashboard</button>
     </div>
     <div class="row">
-      <p>Mongo Status: {{mongoStatus}}</p>
-      <p>EnergyManagementDashboard Status: {{energyManagementDashboardStatus}}</p>
+      <p>Mongo Status: <span class="label {{mongoStatusLabel}}">{{mongoStatus}}</span></p>
+      <p>EnergyManagementDashboard Status: <span class="label {{energyManagementDashboardStatusLabel}}">{{energyManagementDashboardStatus}}<span></p>
       <p>Uptime: {{uptime}}</p>
     </div>
 
