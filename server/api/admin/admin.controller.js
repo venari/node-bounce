@@ -64,7 +64,7 @@ exports.removeMongoLockFile = function(req, res) {
 
   console.log("Removing Mongo Lockfile...");
 
-	sudoCall([ 'rm', '/var/lib/mongod/mongod.lock' ], function(response){
+	sudoCall([ 'rm', '/var/lib/mongodb/mongod.lock' ], function(response){
 		res.json(response);
 	});
 };
