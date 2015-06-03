@@ -55,7 +55,7 @@ angular.module('nodeBounceApp')
 				  console.log('status: ' + status);
 				  console.log('headers: ' + headers);
 				  console.log('data: ' + data);
-				  if(data.indexOf("EnergyManagementDashboard /usr/local/bin/node /home/pi/EnergyMonitoringDashboard/server/app.js")>-1)
+				  if(data.indexOf("app.js")>-1)
 				  {
 					  $scope.energyManagementDashboardStatus = "OK";
 				  $scope.energyManagementDashboardStatusLabel = "label-success";
