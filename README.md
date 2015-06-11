@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/venari/node-bounce.svg)](https://travis-ci.org/venari/node-bounce)
+
 # node-bounce
 Bounce a headless node server, and detect service and database issues with Energy Management Dashboard
 
